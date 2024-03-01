@@ -1,3 +1,5 @@
 import { CallView } from "common/CallView.tsx";
 
-export default <CallView/>
+export default <div>
+	<CallView />
+</div>

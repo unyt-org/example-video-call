@@ -1,7 +1,6 @@
 import { Endpoint, Target } from "unyt_core/types/addressing.ts";
 import { Component } from "uix/components/Component.ts";
 
-
 @endpoint class CallManager {
 	@property static call(mediaStream: MediaStream) {
 		console.log("call from " + datex.meta.sender, mediaStream)
@@ -26,9 +25,10 @@ import { Component } from "uix/components/Component.ts";
 			<video id="ownVideo" src={src} />
 			<video id="remoteVideo" />
 		</div>
-		
+
 	</div>
 })
 export class CallView extends Component {
 	@property remoteEndpointName = ""
+
 }
