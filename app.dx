@@ -4,6 +4,7 @@ description: "A simple UIX app project";
 plugin git_deploy (
 	prod: {
 		on: "push",
-		tests: false
+		tests: false,
+		args: ["-v"]
 	}
 )
