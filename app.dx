@@ -1,5 +1,6 @@
 name: "Hello UIX",
-description: "A simple UIX app project";
+description: "A simple UIX app project"
+source_maps: true;
 
 plugin git_deploy (
 	prod: {
