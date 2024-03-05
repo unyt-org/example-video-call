@@ -9,5 +9,5 @@ location: stage {
 },
 
 domain: stage {
-	prod: 'example-video.unyt.app'
+	prod: 'example-video.unyt.org'
 }
