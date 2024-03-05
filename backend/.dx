@@ -1,7 +1,7 @@
 use stage from #public.uix;
 
 endpoint: stage {
-	prod: @+example-videocall1
+	prod: @+example-videocall2
 },
 
 location: stage {
