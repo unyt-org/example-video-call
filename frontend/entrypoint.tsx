@@ -3,7 +3,7 @@ import { Runtime } from "unyt_core/datex_all.ts";
 
 const remoteEndpointName = eternal ?? $$(new URLSearchParams(globalThis.location.search).get("remote") ?? "" as "@")
 
-const ownMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+const ownMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }).catch(()=>{console.error("No stream")});
 const ownVideo = <video autoplay src={ownMediaStream} />
 const remoteVideo = <video autoplay/>
 
