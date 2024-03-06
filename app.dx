@@ -1,9 +1,2 @@
 name: "UIX Video Call Example",
 description: "A simple UIX app project";
-
-plugin git_deploy (
-	prod: {
-		on: "push",
-		tests: false
-	}
-)
