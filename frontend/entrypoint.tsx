@@ -10,6 +10,7 @@ const remoteVideo = <video autoplay/>
 
 @endpoint class CallManager {
 	@property static call(mediaStream: MediaStream) {
+		remoteEndpointName.val = datex.meta.sender.toString() // TODO: meta.caller
 		remoteVideo.srcObject = mediaStream;
 		return ownMediaStream;
 	}
