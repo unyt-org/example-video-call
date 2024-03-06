@@ -1,6 +1,5 @@
 name: "UIX Video Call Example",
-description: "A simple UIX app project"
-source_maps: true;
+description: "A simple UIX app project";
 
 plugin git_deploy (
 	prod: {
