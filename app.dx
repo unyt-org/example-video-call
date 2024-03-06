@@ -1,5 +1,6 @@
 name: "UIX Video Call Example",
-description: "A simple UIX app project";
+description: "A simple UIX app project",
+installable: true;
 
 plugin git_deploy (
 	prod: {
