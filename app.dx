@@ -5,7 +5,6 @@ source_maps: true;
 plugin git_deploy (
 	prod: {
 		on: "push",
-		tests: false,
-		args: ["-v"]
+		tests: false
 	}
 )
