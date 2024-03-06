@@ -6,7 +6,7 @@ endpoint: stage {
 
 location: stage {
 	prod: @+unyt-host-1
-}
+},
 
 domain: stage {
 	prod: 'video.example.unyt.app'
