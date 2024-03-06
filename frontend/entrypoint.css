@@ -1,0 +1,37 @@
+.callView {
+	display: flex;
+	flex-direction: row;
+	gap: 20px;
+	flex-wrap: wrap;
+
+	div {
+		flex: 1;
+		width: 100%;
+	}
+
+	& > :last-child > :last-child{
+		display: flex;
+		gap: 10px;
+		align-items: baseline;
+
+		input {
+			flex: 1;
+			min-width: 150px;
+		}
+	}
+}
+
+b {
+	color: var(--green);
+}
+
+
+video {
+	background: black;
+	width: 100%;
+}
+
+button {
+	background: var(--green);
+	border: var(--green);
+}

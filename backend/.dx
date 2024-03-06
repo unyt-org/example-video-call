@@ -1,13 +1,9 @@
 use stage from #public.uix;
 
 endpoint: stage {
-	prod: @+example-videocall2
+	prod: @+example-videocall3
 },
 
 location: stage {
 	prod: @+unyt-host-1
-},
-
-domain: stage {
-	prod: 'example-video.unyt.org'
 }

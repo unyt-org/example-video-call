@@ -1,45 +1,35 @@
-# UIX Base Project
+# UIX Video Call Example Project
 
-This repository provides a simple UIX setup, including backend, frontend and configuration files.
+This is a example project demonstrating how to create a basic video call application with UIX.
+Encrypted end-to-end video calls are established via DATEX and transmitted over a WebRTC connection.
 
-*[UIX Docs](https://docs.unyt.org/manual/uix/getting-started)*
+## Project structure
 
-# Project Structure
+This project consists of a single TypeScript module (`frontend/entrypoint.tsx`) containing the UI and video call logic.
+Additionally, CSS styles are defined in `frontend/entrypoint.css`.
 
-## Directories
-The source code is split into three directories. 
+## Streaming video and audio
 
-The `backend` directory contains the backend logic that runs on [Deno](https://deno.com/).
+Establishing a video call happens in four steps:
 
-The `frontend` directory contains the code for the frontend clients (running in the web browser).
+First, a video stream for the current device is requested using the navigator media API:
+```ts
+const ownMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }).catch(console.error);
+```
 
-The default export of the `backend/entrypoint.ts` and `frontend/entrypoint.ts` determine what content
-gets displayed when visiting a page in the browser.
+When the "Call" button is clicked, this media stream is sent to another endpoint by calling `CallManager.call` on the remote endpoint:
 
-The `common` directory contains common modules that can be initialized both in the browser and in the deno backend - they can be imported from modules in the `backend` and `frontend` directory.
+```ts
+await CallManager.call.to(remoteEndpoint.val)(ownMediaStream);
+```
 
-The directory names (`backend`, `frontend`, `common`) are important to tell UIX which code runs in which context. The default names can also be changed in the `app.dx` config file.
+On the remote endpoint, inside the `CallManager.call` function, the passed media stream is displayed in the remote video view:
 
-## app.dx
+```ts
+remoteVideo.srcObject = mediaStream;
+```
 
-The `app.dx` configuration file is required for a UIX app to run. It needs to contain at least the app name.
-The `app.dx` has to be placed next to the app directories (`frontend`, `backend` and `common`) in the default configuration.
-
-# Cross realm imports
-
-Frontend and common modules can import exported values from backend modules.
-In the background, special interface module files are generated, making sure that the backend source code is never exposed to the frontend endpoints.
-
-Access to these exports can be limited by setting DATEX permission filters.
-
-# Development
-
-Compilation of the TS files is not required. The project can be deployed as is.
-There is a devcontainer set up, containing the latest deno version.
-
-To run the project, Deno has to be installed:
-hit `CTRL`+`F5` to launch the project with the launch configuration.
-
-With the `--live` option, frontend browser tabs are automatically reloaded when a file has changed, which is useful for development, but should not be used in production.
-
-This command starts the backend endpoint and also exposes a web server on port 80 or another available port.
+The remote endpoint also returns its own media stream from the `CallManager.call` function, which is then again displayed in the local endpoint's remote video view:
+```ts
+remoteVideo.srcObject = await CallManager.call.to(remoteEndpoint.val)(ownMediaStream);
+```

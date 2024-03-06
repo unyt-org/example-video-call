@@ -1,34 +1,38 @@
-import { Endpoint } from "unyt_core/types/addressing.ts";
-import { Runtime } from "unyt_core/datex_all.ts";
+const ownMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }).catch(() => null);
+const ownVideo = <video autoplay src={ownMediaStream} /> as HTMLVideoElement
+const remoteVideo = <video autoplay/> as HTMLVideoElement
 
-const remoteEndpointName = eternal ?? $$(new URLSearchParams(globalThis.location.search).get("remote") ?? "" as "@")
-
-const ownMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }).catch(()=>{console.error("No stream")});
-const ownVideo = <video autoplay src={ownMediaStream} />
-const remoteVideo = <video autoplay/>
-
+const remoteEndpoint = eternal ?? $$(""); // store the remote endpoint persistently
 
 @endpoint class CallManager {
-	@property static call(mediaStream: MediaStream) {
-		remoteEndpointName.val = datex.meta.sender.toString() // TODO: meta.caller
+	/**
+	 * This function is called remotely from one endpoint to initiate a video call
+	 * @param mediaStream the media stream of the caller endpoint
+	 * @returns the media stream of the called endpoint
+	 */
+	@property static call(mediaStream: MediaStream|null) {
+		remoteEndpoint.val = datex.meta.caller.main.toString()
 		remoteVideo.srcObject = mediaStream;
 		return ownMediaStream;
 	}
 }
 
-export default 
-	<div>
+export default
+	<main>
 		<h1>Video Call</h1>
-		<div>Own Endpoint: {Runtime.endpoint.toString()}</div>
-		<div>Remote Endpoint: <input value={remoteEndpointName}/></div>
-		
-		<button onclick={async () => {
-			const endpoint = Endpoint.get(remoteEndpointName.val);
-			remoteVideo.srcObject = await CallManager.call.to(endpoint)(ownMediaStream);
-		}}>Call</button>
-
 		<div class="callView">
-			{ownVideo}
-			{remoteVideo}
+			<div>
+				{ownVideo}
+				<div>Your Endpoint: <b>{localEndpoint.main.toString()}</b></div>
+			</div>
+			<div>
+				{remoteVideo}
+				<div>
+					Remote Endpoint: <input value={remoteEndpoint}/>
+					<button onclick={async () => {
+						remoteVideo.srcObject = await CallManager.call.to(remoteEndpoint.val)(ownMediaStream);
+					}}><i class="fa-solid fa-video"/> Call</button>
+				</div>
+			</div>
 		</div>
-	</div>
+	</main>
