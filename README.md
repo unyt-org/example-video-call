@@ -5,8 +5,8 @@ Encrypted end-to-end video calls are established via DATEX and transmitted over 
 
 ## Project structure
 
-This project consists of a single TypeScript module (`frontend/entrypoint.tsx`) containing the UI and video call logic.
-Additionally, CSS styles are defined in `frontend/entrypoint.css`.
+This project consists of a single TypeScript module ([`frontend/entrypoint.tsx`](frontend/entrypoint.tsx)) containing the UI and video call logic.
+Additionally, CSS styles are defined in [`frontend/entrypoint.css`](frontend/entrypoint.css).
 
 ## Streaming video and audio
 
