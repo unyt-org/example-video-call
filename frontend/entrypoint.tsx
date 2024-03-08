@@ -1,5 +1,5 @@
 const ownMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }).catch(() => null);
-const ownVideo = <video autoplay src={ownMediaStream} /> as HTMLVideoElement
+const ownVideo = <video autoplay muted src={ownMediaStream} /> as HTMLVideoElement
 const remoteVideo = <video autoplay/> as HTMLVideoElement
 
 const remoteEndpoint = eternal ?? $$(""); // store the remote endpoint persistently
@@ -10,6 +10,7 @@ const remoteEndpoint = eternal ?? $$(""); // store the remote endpoint persisten
 	 * @param mediaStream the media stream of the caller endpoint
 	 * @returns the media stream of the called endpoint
 	 */
+	@timeout(30_000)
 	@property static call(mediaStream: MediaStream|null) {
 		remoteEndpoint.val = datex.meta.caller.main.toString()
 		remoteVideo.srcObject = mediaStream;
