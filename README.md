@@ -33,3 +33,7 @@ The remote endpoint also returns its own media stream from the `CallManager.call
 ```ts
 remoteVideo.srcObject = await CallManager.call.to(remoteEndpoint.val)(ownMediaStream);
 ```
+
+---
+
+<sub>&copy; unyt 2024 • [unyt.org](https://unyt.org)</sub>
