@@ -5,8 +5,8 @@ Encrypted end-to-end video calls are established via DATEX and transmitted over 
 
 ## Project structure
 
-This project consists of a single TypeScript module (`frontend/entrypoint.tsx`) containing the UI and video call logic.
-Additionally, CSS styles are defined in `frontend/entrypoint.css`.
+This project consists of a single TypeScript module ([`frontend/entrypoint.tsx`](frontend/entrypoint.tsx)) containing the UI and video call logic.
+Additionally, CSS styles are defined in [`frontend/entrypoint.css`](frontend/entrypoint.css).
 
 ## Streaming video and audio
 
@@ -33,3 +33,7 @@ The remote endpoint also returns its own media stream from the `CallManager.call
 ```ts
 remoteVideo.srcObject = await CallManager.call.to(remoteEndpoint.val)(ownMediaStream);
 ```
+
+---
+
+<sub>&copy; unyt 2024 • [unyt.org](https://unyt.org)</sub>
