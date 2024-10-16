@@ -1,8 +1,8 @@
-const ownMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }).catch(() => null);
+const ownMediaStream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true }).catch(console.error);
 const ownVideo = <video autoplay src={ownMediaStream} /> as HTMLVideoElement
 const remoteVideo = <video autoplay/> as HTMLVideoElement
 
-const remoteEndpoint = eternal ?? $$(""); // store the remote endpoint persistently
+const remoteEndpoint = eternal ?? $(""); // store the remote endpoint persistently
 
 @endpoint class CallManager {
 	/**
@@ -13,7 +13,7 @@ const remoteEndpoint = eternal ?? $$(""); // store the remote endpoint persisten
 	@property static call(mediaStream: MediaStream|null) {
 		remoteEndpoint.val = datex.meta.caller.main.toString()
 		remoteVideo.srcObject = mediaStream;
-		return ownMediaStream;
+		return ownMediaStream!;
 	}
 }
 
@@ -30,7 +30,7 @@ export default
 				<div>
 					Remote Endpoint: <input value={remoteEndpoint}/>
 					<button onclick={async () => {
-						remoteVideo.srcObject = await CallManager.call.to(remoteEndpoint.val)(ownMediaStream);
+						remoteVideo.srcObject = await CallManager.call.to(remoteEndpoint.val)(ownMediaStream!);
 					}}><i class="fa-solid fa-video"/> Call</button>
 				</div>
 			</div>
